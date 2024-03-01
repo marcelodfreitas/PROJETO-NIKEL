@@ -5,7 +5,7 @@ const session = localStorage.getItem("session")
 checkLogged();
 
 //LOGAR NO SISTEMA//
-document.getElementById("login-form").addEventListener("submit", function(e) {
+document.getElementById("login-form").addEventListener("submit", function (e) {
     e.preventDefault();
 
     const email = document.getElementById("email-input").value;
@@ -14,15 +14,15 @@ document.getElementById("login-form").addEventListener("submit", function(e) {
 
     const account = getAccount(email);
 
-    if(!account) {
+    if (!account) {
         alert("Ops... Verifique o usuario ou a senha.");
         return;
     }
 
-    if(account){
-        if(account.password !== password) {
-        alert("Ops... Verifique o usuario ou a senha.");
-        return;
+    if (account) {
+        if (account.password !== password) {
+            alert("Ops... Verifique o usuario ou a senha.");
+            return;
         }
 
         saveSession(email, checkSession);
@@ -32,18 +32,18 @@ document.getElementById("login-form").addEventListener("submit", function(e) {
 });
 
 //CRIAR CONTA//
-document.getElementById("create-form").addEventListener("submit", function(e) {
+document.getElementById("create-form").addEventListener("submit", function (e) {
     e.preventDefault();
 
     const email = document.getElementById("email-create-input").value;
     const password = document.getElementById("password-create-input").value;
 
-    if(email.lenght < 5) {
+    if (email.length < 5) {
         alert("Preencha um email valido!");
         return;
     }
 
-    if (password.lenght < 4) {
+    if (password.length < 4) {
         alert("Preencha a senha com no minimo 4 digitos!")
         return;
     }
@@ -60,12 +60,12 @@ document.getElementById("create-form").addEventListener("submit", function(e) {
 });
 
 function checkLogged() {
-    if(session) {
+    if (session) {
         sessionStorage.setItem("logged", session);
         logged = session;
     }
 
-    if(logged) {
+    if (logged) {
         saveSession(logged, session);
 
         window.location.href = "home.html";
@@ -77,7 +77,7 @@ function saveAccount(data) {
 }
 
 function saveSession(data, saveSession) {
-    if(saveSession) {
+    if (saveSession) {
         localStorage.setItem("session", data);
     }
 
@@ -87,7 +87,7 @@ function saveSession(data, saveSession) {
 function getAccount(key) {
     const account = localStorage.getItem(key);
 
-    if(account) {
+    if (account) {
         return JSON.parse(account);
     }
 

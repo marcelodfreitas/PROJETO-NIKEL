@@ -14,7 +14,7 @@ document.getElementById("transaction-form").addEventListener("submit", function(
 
     const value = parseFloat(document.getElementById("value-input").value);
     const description = document.getElementById("description-input").value;
-    const date = document.getElementById("date-input").value;
+    const date = document.getElementById("data-input").value;
     const type = document.querySelector('input[name="type-input"]:checked').value;
 
     data.transactions.unshift({
@@ -25,31 +25,34 @@ document.getElementById("transaction-form").addEventListener("submit", function(
     e.target.reset();
     myModal.hide();
 
-    getTransactions();
+    localStorage.removeItem("session");
 
     alert("Lançamento adicionado com sucesso!!");
+
 });
 
 checkLogged();
 
 function checkLogged() {
-    if(session) {
+    if (session) {
         sessionStorage.setItem("logged", session);
         logged = session;
     }
 
-    if(!logged) {
+    if (!logged) {
         window.location.href = "index.html";
         return;
     }
 
     const dataUser = localStorage.getItem(logged);
-    if(dataUser) {
+    if (dataUser) {
         data = JSON.parse(dataUser);
     }
 
     getTransactions();
 }
+
+
 
 function logout() {
     sessionStorage.removeItem("logged");
@@ -66,7 +69,7 @@ function getTransactions() {
     const transactions = data.transactions;
     let transactionsHtml = ``;
 
-    if(transactions.length) {
+    if (transactions.length) {
         transactions.forEach((item) => {
             let type = "Entrada";
 

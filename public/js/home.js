@@ -12,6 +12,7 @@ document.getElementById("transactions-button").addEventListener("click", functio
 })
 
 //ADICIONAR LANÇAMENTO
+
 document.getElementById("transaction-form").addEventListener("submit", function(e) {
     e.preventDefault;
 
@@ -19,6 +20,7 @@ document.getElementById("transaction-form").addEventListener("submit", function(
     const description = document.getElementById("description-input").value;
     const date = document.getElementById("date-input").value;
     const type = document.querySelector('input[name="type-input"]:checked').value;
+    
 
     data.transactions.unshift({
         value: value, type: type, description: description, date: date
@@ -58,14 +60,14 @@ function checkLogged() {
     getCashOut();
     getTotal();
 }
-
+//Sair
 function logout() {
     sessionStorage.removeItem("logged");
     localStorage.removeItem("session");
 
     window.location.href = "index.html";
 }
-
+//Entradas
 function getCashIn() {
     const transactions = data.transactions;
 
@@ -104,7 +106,7 @@ function getCashIn() {
         document.getElementById("cash-in-list").innerHTML = cashInHtml;
     }
 }   
-
+//Saidas
 function getCashOut() {
     const transactions = data.transactions;
 
@@ -146,10 +148,11 @@ function getCashOut() {
     
 
 }   
-
+//Total
 function getTotal() {
     const transactions = data.transactions;
     let total = 0;
+    
 
     transactions.forEach((item) => {
         if(item.type === "1") {
