@@ -7,20 +7,20 @@ let data = {
 };
 
 document.getElementById("button-logout").addEventListener("click", logout)
-document.getElementById("transactions-button").addEventListener("click", function() {
+document.getElementById("transactions-button").addEventListener("click", function () {
     window.location.href = "transactions.html"
 })
 
 //ADICIONAR LANÇAMENTO
 
-document.getElementById("transaction-form").addEventListener("submit", function(e) {
+document.getElementById("transaction-form").addEventListener("submit", function (e) {
     e.preventDefault;
 
     const value = parseFloat(document.getElementById("value-input").value);
     const description = document.getElementById("description-input").value;
     const date = document.getElementById("date-input").value;
     const type = document.querySelector('input[name="type-input"]:checked').value;
-    
+
 
     data.transactions.unshift({
         value: value, type: type, description: description, date: date
@@ -41,18 +41,18 @@ document.getElementById("transaction-form").addEventListener("submit", function(
 checkLogged();
 
 function checkLogged() {
-    if(session) {
+    if (session) {
         sessionStorage.setItem("logged", session);
         logged = session;
     }
 
-    if(!logged) {
+    if (!logged) {
         window.location.href = "index.html";
         return;
     }
 
     const dataUser = localStorage.getItem(logged);
-    if(dataUser) {
+    if (dataUser) {
         data = JSON.parse(dataUser);
     }
 
@@ -73,11 +73,11 @@ function getCashIn() {
 
     const cashIn = transactions.filter((item) => item.type === "1");
 
-    if(cashIn.length) {
+    if (cashIn.length) {
         let cashInHtml = ``;
         let limit = 0;
 
-        if(cashIn.length > 5) {
+        if (cashIn.length > 5) {
             limit = 5;
         } else {
             limit = cashIn.length;
@@ -105,18 +105,18 @@ function getCashIn() {
 
         document.getElementById("cash-in-list").innerHTML = cashInHtml;
     }
-}   
+}
 //Saidas
 function getCashOut() {
     const transactions = data.transactions;
 
     const cashIn = transactions.filter((item) => item.type === "2");
 
-    if(cashIn.length) {
+    if (cashIn.length) {
         let cashInHtml = ``;
         let limit = 0;
 
-        if(cashIn.length > 5) {
+        if (cashIn.length > 5) {
             limit = 5;
         } else {
             limit = cashIn.length;
@@ -145,18 +145,18 @@ function getCashOut() {
         document.getElementById("cash-out-list").innerHTML = cashInHtml;
 
     }
-    
 
-}   
+
+}
 //Total
 function getTotal() {
     const transactions = data.transactions;
     let total = 0;
-    
+
 
     transactions.forEach((item) => {
-        if(item.type === "1") {
-           total += item.value;
+        if (item.type === "1") {
+            total += item.value;
         } else {
             total -= item.value;
         }

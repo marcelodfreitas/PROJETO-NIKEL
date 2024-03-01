@@ -9,7 +9,7 @@ let data = {
 document.getElementById("button-logout").addEventListener("click", logout)
 
 //ADICIONAR LANÇAMENTO
-document.getElementById("transaction-form").addEventListener("submit", function(e) {
+document.getElementById("transaction-form").addEventListener("submit", function (e) {
     e.preventDefault;
 
     const value = parseFloat(document.getElementById("value-input").value);
